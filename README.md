@@ -5,6 +5,6 @@ This repo implements the VOS (Video Object Segmentation) algorithm in the paper,
 
 ## Usage
 The implementation is based on Python 3.6.8. Please download the required Python version [here](https://www.python.org/downloads/). Go to the root directory of the repo in command line window and run the following command:
-> python # TODO
+> python track.py [video_name]
 
-// TODO
+[video_name] can be any folder name at directory ${repo_root}/unit_test.
