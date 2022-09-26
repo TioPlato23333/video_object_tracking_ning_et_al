@@ -13,7 +13,8 @@ from skimage.feature import hog
 import sys
 
 class Parameters:
-    video_name_list = ['kangaroo', 'gymnastics', 'butterfly', 'ball', 'ball_short']
+    video_name_list = ['gymnastics', 'butterfly', 'ball', 'ball_short', 'woman', \
+                       'surfing', 'ball2', 'bolt', 'car', 'bear']
     hog_cell_size = 8
     hog_direction = 9
     weak_classifier_num = 3
@@ -203,11 +204,15 @@ class VideoTracker:
         ac = active_contour(gaussian(crop, 3, preserve_range=False, multichannel=True), ac_init, \
                             coordinates='rc', \
                             beta=10, \
-                            alpha=0.015, \
+                            alpha=0.001, \
                             gamma=0.001, \
-                            max_iterations=100, \
-                            max_px_move=0.1, \
+                            max_iterations=50, \
+                            max_px_move=0.5, \
                             boundary_condition='periodic')
+        # beta = 10, alpha = 0.015, gamma = 0.001, max_iter = 100, px_move = 0.1 for ball
+        # beta = 10, alpha = 0.015, gamma = 0.001, max_iter = 20, px_move = 0.1 for ball2
+        # beta = 5, alpha = 0.001, gamma = 0.001, max_iter = 50, px_move = 0.1 for surfing
+        # beta = 10, alpha = 0.001, gamma = 0.001, max_iter = 50, px_move = 0.5 for bear
         # update result size
         new_x1, new_y1, new_x2, new_y2 = self.get_box_from_ac(ac)
         self.last_target_size = [new_x1 + range_x1, new_y1 + range_y1, \
